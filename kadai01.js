@@ -24,14 +24,17 @@ var animals = ['パンダ', 'ライオン', 'キリン'];
 var choice = prompt('動物を入力');
 
 var i = 0;
+
 while (i < animals.length) {
-  if(choice ==='ライオン' && animals[i] ==='ライオン'){
-  alert('ライオン');
-  break;
- }
- alert(animals[i]);
- i++;
+    if(choice ==='ライオン'){
+        alert('ライオン');
+        break;
+    }
+ 
+    alert(animals[i]);
+    i++;
 }
+
 
 //6. オブジェクト変数の配列の形式で、動物と体重を表現してみましょう。例としてパンダは80(Kg)、ライオンは200(Kg)、キリンは300(Kg)としましょう。
 //7. 6.でpromptで入力した動物名の体重をalertするように変更してください。
