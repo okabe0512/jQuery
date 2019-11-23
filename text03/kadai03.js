@@ -22,6 +22,34 @@ test05.js
 
 3.jQueryによるAjaxはajax()以外にget()やpost()、getJSON()メソッドがあります。今回学習した課題をgetJSON()で書き換えてみましょう。
 
+(function($, window) {
+  $(function() {
+    alert('first');
+    $('#get_bank_list').on('click', function(e) {
+      alert('click');
+      var url = 'https://raw.githubusercontent.com/zengin-code/source-data/master/data/banks.json';
+
+      $.getJSON({
+        url: url,
+        type: 'get',
+        data: {}
+      }).done(function(data, status, xhr) {
+        alert('done');
+        var result = JSON.stringify(data);
+        $('#result').val(result);
+      }).fail(function(data, status, err) {
+        alert('fail');
+        var result = JSON.stringify(data);
+        $('#result').val(result);
+      }).always(function() {
+        alert('always');
+      });
+
+      alert('under getJSON');
+    });
+    alert('last');
+  });
+})(jQuery, window);
 
 
 4.デートピッカーのサンプルにボタンを追加して、そのボタンを押したときにカレンダー表示されるように修正してみましょう。
@@ -30,6 +58,59 @@ test05.js
 
 
 5.「郵便番号から住所入力するjQueryプラグイン」を参考にして、郵便番号→住所変換で、入力する郵便番号を７桁にまとめるように修正してみましょう。
+
+HTML
+
+<html>
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <h1>jQueryの郵便番号→住所変換プラグイン</h1>
+
+  <dl>
+    <dt>郵便番号</dt>
+    <dd><input type="text" id="zip1"></dd>
+    <dt>都道府県</dt>
+    <dd><input type="text" id="pref"></dd>
+    <dt>市区町村</dt>
+    <dd><input type="text" id="city"></dd>
+    <dt>町名等</dt>
+    <dd><input type="text" id="street"></dd>
+  </dl>
+
+  <!-- jQueryの読み込み -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+  <!-- 郵便番号→住所変換用プラグインの読み込み -->
+  <script src="https://jpostal-1006.appspot.com/jquery.jpostal.js"></script>
+
+  <!-- 自作JavaScriptの読み込み -->
+  <script src="test09.js"></script>
+</body>
+</html>
+
+
+JavaScript
+
+(function($, window) {
+  $(function() {
+    // ここに処理を書きます
+    $('#zip1').jpostal({
+        postcode : [
+            '#zip1'
+        ],
+        address : {
+            '#pref'  : '%3',
+            '#city'  : '%4',
+            '#street'  : '%5'
+        }
+    });
+  });
+})(jQuery, window);
+
+
+
 
 6.さらに「検索」ボタンを追加して、そのボタンを押すまでは「検索しない」ように修正してみましょう
 
