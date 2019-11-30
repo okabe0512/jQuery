@@ -114,4 +114,53 @@ JavaScript
 
 6.さらに「検索」ボタンを追加して、そのボタンを押すまでは「検索しない」ように修正してみましょう
 
+HTML
+
+<html>
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <h1>jQueryの郵便番号→住所変換プラグイン</h1>
+  <div class="block">
+    <p>郵便番号</p>
+    <input type="text" id="zip1">
+    <input id="btn" type="button" value="住所検索">
+    <p>都道府県</p>
+    <input type="text" id="pref">
+    <p>市区町村</p>
+    <input type="text" id="city">
+    <p>町名等</p>
+    <input type="text" id="street">
+  </div>
+  <!-- jQueryの読み込み -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <!-- 郵便番号→住所変換用プラグインの読み込み -->
+  <script src="https://jpostal-1006.appspot.com/jquery.jpostal.js"></script>
+  <!-- 自作JavaScriptの読み込み -->
+  <script src="test09.js"></script>
+</body>
+</html>
+
+
+JavaScript
+
+(function($, window) {
+  $(function() {
+    // ここに処理を書きます
+    $('#zip1').jpostal({
+    		click : '#btn',
+        postcode : [
+            '#zip1'
+        ],
+        address : {
+            '#pref'  : '%3',
+            '#city'  : '%4',
+            '#street'  : '%5'
+        }
+    });
+  });
+})(jQuery, window);
+
+
 */
