@@ -16,9 +16,74 @@ test03.js
 })(jQuery, window);
 
 
+
 2.フォームの最後のサンプルでメールアドレスとパスワードのチェック処理を「関数」で作成し、#loginをクリックしたときに呼び出すように修正してください。
 
-test05.js
+HTML
+
+<html>
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <h1>jQueryとフォーム</h1>
+  <form>
+    <dl>
+      <dt>メールアドレス</dt>
+      <dd><input type="text" id="email"></dd>
+      <dt>パスワード</dt>
+      <dd><input type="password" id="password"></dd>
+    </dl>
+    <input type="button" id="login" value="ログイン">
+  </form>
+  <!-- jQueryの読み込み -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+  <!-- 自作JavaScriptの読み込み -->
+  <script src="test05+.js"></script>
+</body>
+</html>
+
+
+js
+
+(function($, window) {
+  $(function() {
+  
+    function valEmail(){
+      
+      var mail = $('#email').val(); //HTMLでValue記述はないが初期値はある
+      
+      if (mail == '') {
+          alert('メールアドレスを入力してください');
+        } else if (mail.indexOf('@') < 0) {
+          alert('メールアドレスには必ず「@」が必要です');
+        } else{
+          alert(mail);
+        }
+    }
+    
+    function valPass(){
+      
+      var pass = $('#password').val();
+    
+      if (pass == '') {
+          alert('パスワードを入力してください');
+        } else if (pass.length < 6) {
+          alert('パスワードは6文字以上です');
+        } else{
+          alert(pass);
+        }
+    }
+    
+    $('#login').on('click', function() {
+      valEmail(),
+      valPass();
+    });
+  });
+})(jQuery, window);
+
+
 
 3.jQueryによるAjaxはajax()以外にget()やpost()、getJSON()メソッドがあります。今回学習した課題をgetJSON()で書き換えてみましょう。
 
@@ -52,8 +117,57 @@ test05.js
 })(jQuery, window);
 
 
-4.デートピッカーのサンプルにボタンを追加して、そのボタンを押したときにカレンダー表示されるように修正してみましょう。
 
+4.デートピッカーのサンプルにボタンを追加して、そのボタンを押したときにカレンダー表示されるように修正してみましょう。
+ 
+HTML
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- デフォルトのテーマ  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.4.3/flatpickr.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+</head>
+<body>
+  <h1>jQueryのデートピッカープラグイン</h1>
+  
+  <div class="flatpickr input-group" data-id="strap">
+    <input type="text" data-input>
+    <a class="input-button" title="カレンダー" data-toggle>
+      <i class="material-icons">date_range</i>
+    </a>
+  
+  </div>
+
+  <!-- jQueryの読み込み -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+  <!-- デートピッカー用プラグインの読み込み -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.4.3/flatpickr.min.js"></script>
+
+  <!-- デートピッカーの日本語化用JSの読み込み -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ja.js"></script>
+
+  <!-- 自作JavaScriptの読み込み -->
+  <script src="test08+.js"></script>
+</body>
+</html>
+
+
+js
+
+(function($, window) {
+  $(function() {
+    // ここに処理を書きます
+    const config = {
+      wrap: true
+    };
+    flatpickr('.flatpickr', config);
+
+  });
+})(jQuery, window);
 
 
 
@@ -108,7 +222,6 @@ JavaScript
     });
   });
 })(jQuery, window);
-
 
 
 
